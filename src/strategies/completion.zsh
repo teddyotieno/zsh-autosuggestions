@@ -44,6 +44,12 @@ _zsh_autosuggest_capture_setup() {
 		}
 	fi
 
+	# Don't add any extra carriage returns
+	stty -onlcr
+
+	# Don't translate carriage returns to newlines
+	stty -icrnl
+
 	# Try to avoid any suggestions that wouldn't match the prefix
 	zstyle ':completion:*' matcher-list ''
 	zstyle ':completion:*' path-completion false

@@ -14,6 +14,11 @@ describe 'the `completion` suggestion strategy' do
     wait_for { session.content }.to eq('baz bar')
   end
 
+  it 'handles newlines correctly' do
+    session.send_string('baz \\').send_keys('escape', 'enter')
+    wait_for { session.content }.to eq("baz \\\nbar")
+  end
+
   context 'when async mode is enabled' do
     let(:options) { ['ZSH_AUTOSUGGEST_USE_ASYNC=true', 'ZSH_AUTOSUGGEST_STRATEGY=completion'] }
 
